@@ -1,6 +1,6 @@
 package avinash.springframework.spring5restwebflux;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
