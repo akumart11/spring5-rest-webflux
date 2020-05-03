@@ -1,4 +1,4 @@
-package avinash.springframework.spring5restwebflux;
+package avinash.springframework.spring5webfluxrest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
