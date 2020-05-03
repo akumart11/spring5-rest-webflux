@@ -1,22 +1,25 @@
-package avinash.springframework.spring5restwebflux.bootstrap;
+package avinash.springframework.spring5webfluxrest.bootstrap;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import avinash.springframework.spring5restwebflux.domain.Category;
-import avinash.springframework.spring5restwebflux.domain.Customer;
-import avinash.springframework.spring5restwebflux.repositories.CategoryRepository;
-import avinash.springframework.spring5restwebflux.repositories.CustomerRepository;
+import avinash.springframework.spring5webfluxrest.domain.Category;
+import avinash.springframework.spring5webfluxrest.domain.Customer;
+import avinash.springframework.spring5webfluxrest.repositories.CategoryRepository;
+import avinash.springframework.spring5webfluxrest.repositories.CustomerRepository;
 
+/**
+ * Created by jt on 12/23/17.
+ */
 @Component
 public class Bootstrap implements CommandLineRunner {
 
     private final CategoryRepository categoryRepository;
-    private final CustomerRepository customerRepository;
+    private final CustomerRepository vendorRepository;
 
-    public Bootstrap(CategoryRepository categoryRepository, CustomerRepository customerRepository) {
+    public Bootstrap(CategoryRepository categoryRepository, CustomerRepository vendorRepository) {
         this.categoryRepository = categoryRepository;
-        this.customerRepository = customerRepository;
+        this.vendorRepository = vendorRepository;
     }
 
     @Override
@@ -43,29 +46,31 @@ public class Bootstrap implements CommandLineRunner {
 
             System.out.println("Loaded Categories: " + categoryRepository.count().block());
 
-            customerRepository.save(Customer.builder()
+            vendorRepository.save(Customer.builder()
                         .firstName("Joe")
                         .lastName("Buck").build()).block();
 
-            customerRepository.save(Customer.builder()
+            vendorRepository.save(Customer.builder()
                     .firstName("Micheal")
                     .lastName("Weston").build()).block();
 
-            customerRepository.save(Customer.builder()
+            vendorRepository.save(Customer.builder()
                     .firstName("Jessie")
                     .lastName("Waters").build()).block();
 
-            customerRepository.save(Customer.builder()
+            vendorRepository.save(Customer.builder()
                     .firstName("Bill")
                     .lastName("Nershi").build()).block();
 
-            customerRepository.save(Customer.builder()
+            vendorRepository.save(Customer.builder()
                     .firstName("Jimmy")
                     .lastName("Buffett").build()).block();
 
-            System.out.println("Loaded Vendors: " + customerRepository.count().block());
+            System.out.println("Loaded Vendors: " + vendorRepository.count().block());
 
         }
+
+
 
     }
 }

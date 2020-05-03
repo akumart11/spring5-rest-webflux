@@ -1,13 +1,12 @@
-package avinash.springframework.spring5restwebflux;
+package avinash.springframework.spring5webfluxrest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Spring5RestWebfluxApplication {
+public class Spring5WebfluxRestApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Spring5RestWebfluxApplication.class, args);
+		SpringApplication.run(Spring5WebfluxRestApplication.class, args);
 	}
-
 }
