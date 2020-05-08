@@ -1,9 +1,13 @@
 package avinash.springframework.spring5webfluxrest.controllers;
 
+
+import static org.mockito.ArgumentMatchers.any;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
+import org.reactivestreams.Publisher;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import avinash.springframework.spring5webfluxrest.domain.Category;
@@ -43,9 +47,42 @@ public class CategoryControllerTest {
 		BDDMockito.given(categoryRepository.findById("someid"))
 		.willReturn(Mono.just(Category.builder().description("Cat1").build()));
 		
-		webTestClient.get().uri("/api/v1/catgeories/someid")
+		webTestClient.get()
+		.uri("/api/v1/categories/someid")
 		.exchange()
 		.expectBody(Category.class);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void create() {
+		BDDMockito.given(categoryRepository.saveAll(any(Publisher.class)))
+		.willReturn(Flux.just(Category.builder().description("Some").build()));
+		
+		Mono<Category> monoToSave = Mono.just(Category.builder().description("Some").build());
+		
+		webTestClient.post()
+		.uri("/api/v1/categories/")
+		.body(monoToSave,Category.class)
+		.exchange()
+		.expectStatus()
+		.isCreated();
+		
+	}
+	
+	@Test
+	public void update() {
+		BDDMockito.given(categoryRepository.save(any(Category.class)))
+		.willReturn(Mono.just(Category.builder().build()));
+		
+		Mono<Category> monoToUpdate = Mono.just(Category.builder().description("Some").build());
+		
+		webTestClient.put()
+		.uri("/api/v1/categories/someid")
+		.body(monoToUpdate,Category.class)
+		.exchange()
+		.expectStatus()
+		.isOk();
 	}
 
 }
